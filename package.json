@@ -1,7 +1,7 @@
 {
   "name": "whatwg-streams-b",
   "description": "An unofficial WHATWG Streams npm package",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": {
     "name": "bouzuya",
     "email": "m@bouzuya.net",
