@@ -101,20 +101,24 @@ export interface Writer {
   write(chunk: any): any;
 }
 
+export interface TransformStreamDefaultController {
+  enqueue(chunk: any): any;
+  close(): any;
+  error(reason: any): any;
+}
+
+export type TransformStreamController =
+  TransformStreamDefaultController;
+
 export class TransformStream {
   constructor(transformer: {
-    start?(
-      enqueue: Function, close: Function, error: Function
-    ): any,
+    start?(controller: TransformStreamController): any,
     transform?(
       chunk: any,
-      done: Function,
-      enqueue: Function,
-      close: Function,
-      error: Function
+      controller: TransformStreamController
     ): any,
     flush?(
-      enqueue: Function, close: Function, error: Function
+      controller: TransformStreamController
     ): any
   });
   readable: ReadableStream;
