@@ -1,0 +1,38 @@
+{
+  "name": "whatwg-streams-b",
+  "description": "An unofficial WHATWG Streams npm package",
+  "version": "0.0.0",
+  "author": {
+    "name": "bouzuya",
+    "email": "m@bouzuya.net",
+    "url": "http://bouzuya.net"
+  },
+  "bugs": {
+    "url": "https://github.com/bouzuya/whatwg-streams-b/issues"
+  },
+  "devDependencies": {
+    "cpx": "1.5.0",
+    "npm-run-all": "3.1.0",
+    "rimraf": "2.5.4"
+  },
+  "files": [
+    "lib",
+    "index.js",
+    "index.d.ts"
+  ],
+  "homepage": "https://github.com/bouzuya/whatwg-streams-b#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bouzuya/whatwg-streams-b"
+  },
+  "scripts": {
+    "build": "npm-run-all -s 'copy:whatwg-streams'",
+    "clean": "rimraf lib",
+    "copy:whatwg-streams": "cpx './streams/reference-implementation/lib/*' './lib/'",
+    "prepublish": "npm-run-all -s 'clean' 'build'"
+  },
+  "typings": "index.d.ts"
+}
