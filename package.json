@@ -23,7 +23,7 @@
   "homepage": "https://github.com/bouzuya/whatwg-streams-b#readme",
   "keywords": [],
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/bouzuya/whatwg-streams-b"
