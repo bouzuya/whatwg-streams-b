@@ -7,11 +7,17 @@
     "email": "m@bouzuya.net",
     "url": "http://bouzuya.net"
   },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
   "bugs": {
     "url": "https://github.com/bouzuya/whatwg-streams-b/issues"
   },
   "devDependencies": {
-    "cpx": "1.5.0",
+    "babel-cli": "6.16.0",
+    "babel-preset-es2015": "6.16.0",
     "npm-run-all": "3.1.0",
     "rimraf": "2.5.4"
   },
@@ -29,9 +35,8 @@
     "url": "https://github.com/bouzuya/whatwg-streams-b"
   },
   "scripts": {
-    "build": "npm-run-all -s 'copy:whatwg-streams'",
+    "build": "babel --out-dir ./lib/ streams/reference-implementation/lib/",
     "clean": "rimraf lib",
-    "copy:whatwg-streams": "cpx './streams/reference-implementation/lib/*' './lib/'",
     "prepublish": "npm-run-all -s 'clean' 'build'"
   },
   "typings": "index.d.ts"
