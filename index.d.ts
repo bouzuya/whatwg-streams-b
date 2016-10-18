@@ -1,6 +1,6 @@
 export declare class ReadableByteStreamController<T> {
   constructor(
-    stream: any,
+    stream: ReadableStream<T>,
     underlyingByteSource: Source<T>,
     highWaterMark: number
   );
@@ -13,7 +13,7 @@ export declare class ReadableByteStreamController<T> {
 
 export declare class ReadableStreamDefaultController<T> {
   constructor(
-    stream: any,
+    stream: ReadableStream<T>,
     underlyingSource: Source<T>,
     size: any,
     highWaterMark: number
@@ -29,15 +29,15 @@ export type ReadableStreamController<T> =
 
 export interface ReadableStreamDefaultReader<T> {
   // constructor(stream)
-  readonly closed: Promise<any>;
-  cancel(reason: any): Promise<any>;
+  readonly closed: Promise<void>;
+  cancel(reason: any): Promise<void>;
   read(): Promise<T>;
   releaseLock(): void;
 }
 
 export interface ReadableStreamBYOBReader<T> {
-  readonly closed: Promise<any>;
-  cancel(reason: any): Promise<any>;
+  readonly closed: Promise<void>;
+  cancel(reason: any): Promise<void>;
   read(view: any): Promise<T>; // ArrayBuffer.isView(view) === true && view.byteLength > 0
   releaseLock(): void;
 }
