@@ -23,23 +23,23 @@ export declare class ReadableStreamDefaultController<T> {
 export type ReadableStreamController<T> =
   ReadableStreamDefaultController<T> | ReadableByteStreamController<T>;
 
-export interface ReadableStreamDefaultReader {
+export interface ReadableStreamDefaultReader<T> {
   // constructor(stream)
   readonly closed: Promise<any>;
   cancel(reason: any): Promise<any>;
-  read(): Promise<any>;
+  read(): Promise<T>;
   releaseLock(): void;
 }
 
-export interface ReadableStreamBYOBReader {
+export interface ReadableStreamBYOBReader<T> {
   readonly closed: Promise<any>;
   cancel(reason: any): Promise<any>;
-  read(view: any): Promise<any>; // ArrayBuffer.isView(view) === true && view.byteLength > 0
+  read(view: any): Promise<T>; // ArrayBuffer.isView(view) === true && view.byteLength > 0
   releaseLock(): void;
 }
 
-export type ReadableStreamReader =
-  ReadableStreamDefaultReader | ReadableStreamBYOBReader;
+export type ReadableStreamReader<T> =
+  ReadableStreamDefaultReader<T> | ReadableStreamBYOBReader<T>;
 
 export interface Source<T> {
   type?: 'bytes' | undefined;
@@ -74,7 +74,7 @@ export declare class ReadableStream {
   );
   readonly locked: boolean;
   cancel(reason: any): Promise<any>;
-  getReader(options?: { mode?: string; }): ReadableStreamReader;
+  getReader(options?: { mode?: string; }): ReadableStreamReader<any>;
   pipeThrough(
     transform: { writable: WritableStream; readable: ReadableStream; },
     options?: {
