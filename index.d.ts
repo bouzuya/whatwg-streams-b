@@ -132,8 +132,8 @@ export class TransformStream<T, U> {
       controller: TransformStreamController<U>
     ): any
   });
-  readable: ReadableStream<T>;
-  writable: WritableStream<U>;
+  readable: ReadableStream<U>;
+  writable: WritableStream<T>;
 }
 
 export declare class WritableStreamDefaultController<T> {
