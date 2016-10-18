@@ -94,7 +94,7 @@ export declare class ReadableStream {
   tee(): [ReadableStream, ReadableStream];
 }
 
-export interface Writer {
+export interface Writer<T> {
   // constructor(stream)
   readonly closed: boolean;
   readonly desiredSize: number;
@@ -103,7 +103,7 @@ export interface Writer {
   abort(reason: any): any;
   close(): any;
   releaseLock(): any;
-  write(chunk: any): any;
+  write(chunk: T): any;
 }
 
 export interface TransformStreamDefaultController {
@@ -150,5 +150,5 @@ export declare class WritableStream {
   // constructor(underlyingSink = {}, { size, highWaterMark = 1 } = {})
   readonly locked: boolean;
   abort(reason: any): Promise<any>;
-  getWriter(): Writer;
+  getWriter(): Writer<any>;
 }
