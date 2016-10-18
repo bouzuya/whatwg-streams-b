@@ -48,29 +48,31 @@ export interface Source<T> {
   cancel?(reason: any): Promise<any> | any | void;
 }
 
-export interface QueuingStrategy {
-  size?: (chunk: any) => number;
+export interface QueuingStrategy<T> {
+  size?: (chunk: T) => number;
   readonly highWaterMark?: number;
 }
 
-export declare class ByteLengthQueuingStrategy
-  implements QueuingStrategy {
+export declare class ByteLengthQueuingStrategy<
+  T extends { byteLength: number; }
+  >
+  implements QueuingStrategy<T> {
   constructor({ highWaterMark }: { highWaterMark: number; });
   size: (chunk: { byteLength: number; }) => number;
   readonly highWaterMark: number;
 }
 
-export declare class CountQueuingStrategy
-  implements QueuingStrategy {
+export declare class CountQueuingStrategy<T>
+  implements QueuingStrategy<T> {
   constructor({ highWaterMark }: { highWaterMark: number; });
-  size: (chunk: any) => number;
+  size: (chunk: T) => number;
   readonly highWaterMark: number;
 }
 
 export declare class ReadableStream<T> {
   constructor(
     underlyingSource?: Source<T>,
-    options?: QueuingStrategy
+    options?: QueuingStrategy<T>
   );
   readonly locked: boolean;
   cancel(reason: any): Promise<any>;
