@@ -137,7 +137,12 @@ export class TransformStream<T, U> {
 }
 
 export declare class WritableStreamDefaultController<T> {
-  constructor(stream: any, underlyingSink: any, size: any, highWaterMark: any);
+  constructor(
+    stream: any,
+    underlyingSink: Sink<T>,
+    size: any,
+    highWaterMark: number
+  );
   error(error: any): void;
 }
 
