@@ -138,15 +138,15 @@ export declare class WritableStreamDefaultController<T> {
 export type WritableStreamController<T> =
   WritableStreamDefaultController<T>;
 
-export interface Sink {
-  start?(controller: WritableStreamController<any>): Promise<any> | any | void;
-  write?(chunk: any): Promise<any> | any | void;
+export interface Sink<T> {
+  start?(controller: WritableStreamController<T>): Promise<any> | any | void;
+  write?(chunk: T): Promise<any> | any | void;
   close?(): Promise<any> | any | void;
   abort?(reason: any): Promise<any> | any | void;
 }
 
 export declare class WritableStream {
-  constructor(underlyingSink?: Sink);
+  constructor(underlyingSink?: Sink<any>);
   // constructor(underlyingSink = {}, { size, highWaterMark = 1 } = {})
   readonly locked: boolean;
   abort(reason: any): Promise<any>;
