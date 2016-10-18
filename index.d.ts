@@ -130,16 +130,16 @@ export class TransformStream {
   writable: WritableStream;
 }
 
-export interface WritableStreamDefaultController {
-  // constructor(stream, underlyingSink, size, highWaterMark)
-  error(error: any): any;
+export declare class WritableStreamDefaultController<T> {
+  constructor(stream: any, underlyingSink: any, size: any, highWaterMark: any);
+  error(error: any): void;
 }
 
-export type WritableStreamController =
-  WritableStreamDefaultController;
+export type WritableStreamController<T> =
+  WritableStreamDefaultController<T>;
 
 export interface Sink {
-  start?(controller: WritableStreamController): Promise<any> | any | void;
+  start?(controller: WritableStreamController<any>): Promise<any> | any | void;
   write?(chunk: any): Promise<any> | any | void;
   close?(): Promise<any> | any | void;
   abort?(reason: any): Promise<any> | any | void;
