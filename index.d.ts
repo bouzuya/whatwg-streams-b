@@ -113,9 +113,9 @@ export interface Writer<T> {
 }
 
 export interface TransformStreamDefaultController<T> {
-  enqueue(chunk: T): any;
-  close(): any;
-  error(reason: any): any;
+  enqueue(chunk: T): void;
+  close(): void;
+  error(reason: any): void;
 }
 
 export type TransformStreamController<T> =
