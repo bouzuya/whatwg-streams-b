@@ -1,13 +1,13 @@
-export declare class ReadableByteStreamController {
+export declare class ReadableByteStreamController<T> {
   constructor(stream: any, underlyingByteSource: any, highWaterMark: any);
   readonly byobRequest: any;
   readonly desiredSize: number;
   close(): void;
-  enqueue(chunk: any): void;
+  enqueue(chunk: T): void;
   error(error: any): void;
 }
 
-export declare class ReadableStreamDefaultController {
+export declare class ReadableStreamDefaultController<T> {
   constructor(
     stream: any,
     underlyingSource: any,
@@ -16,12 +16,12 @@ export declare class ReadableStreamDefaultController {
   );
   readonly desiredSize: number;
   close(): void;
-  enqueue(chunk: any): void;
+  enqueue(chunk: T): void;
   error(error: any): void;
 }
 
-export type ReadableStreamController =
-  ReadableStreamDefaultController | ReadableByteStreamController;
+export type ReadableStreamController<T> =
+  ReadableStreamDefaultController<T> | ReadableByteStreamController<T>;
 
 export interface ReadableStreamDefaultReader {
   // constructor(stream)
@@ -43,8 +43,8 @@ export type ReadableStreamReader =
 
 export interface Source {
   type?: 'bytes' | undefined;
-  start?(controller: ReadableStreamController): Promise<any> | any | void;
-  pull?(controller: ReadableStreamController): Promise<any> | any | void;
+  start?(controller: ReadableStreamController<any>): Promise<any> | any | void;
+  pull?(controller: ReadableStreamController<any>): Promise<any> | any | void;
   cancel?(reason: any): Promise<any> | any | void;
 }
 
