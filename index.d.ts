@@ -15,7 +15,7 @@ export declare class ReadableStreamDefaultController<T> {
   constructor(
     stream: ReadableStream<T>,
     underlyingSource: Source<T>,
-    size: any,
+    size: ((chunk: T) => number) | undefined,
     highWaterMark: number
   );
   readonly desiredSize: number;
@@ -79,7 +79,7 @@ export declare class ReadableStream<T> {
     options?: QueuingStrategy<T>
   );
   readonly locked: boolean;
-  cancel(reason: any): Promise<any>;
+  cancel(reason: any): Promise<void>;
   getReader(options?: { mode?: string; }): ReadableStreamReader<T>;
   pipeThrough<U>(
     transform: { writable: WritableStream<T>; readable: ReadableStream<U>; },
@@ -96,20 +96,20 @@ export declare class ReadableStream<T> {
       preventAbort?: boolean;
       preventCancel?: boolean;
     }
-  ): Promise<any>;
+  ): Promise<void>;
   tee(): [ReadableStream<T>, ReadableStream<T>];
 }
 
-export interface Writer<T> {
+export interface WritableStreamDefaultWriter<T> {
   // constructor(stream)
-  readonly closed: boolean;
+  readonly closed: Promise<void>;
   readonly desiredSize: number;
-  readonly ready: boolean;
+  readonly ready: Promise<void>;
 
-  abort(reason: any): any;
-  close(): any;
-  releaseLock(): any;
-  write(chunk: T): any;
+  abort(reason: any): Promise<void>;
+  close(): Promise<any>;
+  releaseLock(): void;
+  write(chunk: T): Promise<any>;
 }
 
 export interface TransformStreamDefaultController<T> {
@@ -138,9 +138,9 @@ export class TransformStream<T, U> {
 
 export declare class WritableStreamDefaultController<T> {
   constructor(
-    stream: any,
+    stream: WritableStream<T>,
     underlyingSink: Sink<T>,
-    size: any,
+    size: ((chunk: T) => number) | undefined,
     highWaterMark: number
   );
   error(error: any): void;
@@ -161,5 +161,5 @@ export declare class WritableStream<T> {
   // constructor(underlyingSink = {}, { size, highWaterMark = 1 } = {})
   readonly locked: boolean;
   abort(reason: any): Promise<any>;
-  getWriter(): Writer<T>;
+  getWriter(): WritableStreamDefaultWriter<T>;
 }
