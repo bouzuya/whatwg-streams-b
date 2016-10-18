@@ -1,5 +1,9 @@
 export declare class ReadableByteStreamController<T> {
-  constructor(stream: any, underlyingByteSource: any, highWaterMark: any);
+  constructor(
+    stream: any,
+    underlyingByteSource: Source<T>,
+    highWaterMark: number
+  );
   readonly byobRequest: any;
   readonly desiredSize: number;
   close(): void;
@@ -10,9 +14,9 @@ export declare class ReadableByteStreamController<T> {
 export declare class ReadableStreamDefaultController<T> {
   constructor(
     stream: any,
-    underlyingSource: any,
+    underlyingSource: Source<T>,
     size: any,
-    highWaterMark: any
+    highWaterMark: number
   );
   readonly desiredSize: number;
   close(): void;
