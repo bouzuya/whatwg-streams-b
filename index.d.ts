@@ -1,18 +1,23 @@
-export interface ReadableByteStreamController {
-  // constructor(stream, underlyingSource, size, highWaterMark)
-  readonly desiredSize: number;
-  close(): any;
-  enqueue(chunk: any): any;
-  error(error: any): any;
-}
-
-export interface ReadableStreamDefaultController {
-  // constructor(stream, underlyingByteSource, highWaterMark)
+export declare class ReadableByteStreamController {
+  constructor(stream: any, underlyingByteSource: any, highWaterMark: any);
   readonly byobRequest: any;
   readonly desiredSize: number;
-  close(): any;
-  enqueue(chunk: any): any;
-  error(error: any): any;
+  close(): void;
+  enqueue(chunk: any): void;
+  error(error: any): void;
+}
+
+export declare class ReadableStreamDefaultController {
+  constructor(
+    stream: any,
+    underlyingSource: any,
+    size: any,
+    highWaterMark: any
+  );
+  readonly desiredSize: number;
+  close(): void;
+  enqueue(chunk: any): void;
+  error(error: any): void;
 }
 
 export type ReadableStreamController =
