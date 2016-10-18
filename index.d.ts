@@ -108,24 +108,24 @@ export interface Writer<T> {
   write(chunk: T): any;
 }
 
-export interface TransformStreamDefaultController {
-  enqueue(chunk: any): any;
+export interface TransformStreamDefaultController<T> {
+  enqueue(chunk: T): any;
   close(): any;
   error(reason: any): any;
 }
 
-export type TransformStreamController =
-  TransformStreamDefaultController;
+export type TransformStreamController<T> =
+  TransformStreamDefaultController<T>;
 
 export class TransformStream<T, U> {
   constructor(transformer: {
-    start?(controller: TransformStreamController): any,
+    start?(controller: TransformStreamController<U>): any,
     transform?(
-      chunk: any,
-      controller: TransformStreamController
+      chunk: T,
+      controller: TransformStreamController<U>
     ): any,
     flush?(
-      controller: TransformStreamController
+      controller: TransformStreamController<U>
     ): any
   });
   readable: ReadableStream<T>;
