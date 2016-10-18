@@ -41,10 +41,10 @@ export interface ReadableStreamBYOBReader {
 export type ReadableStreamReader =
   ReadableStreamDefaultReader | ReadableStreamBYOBReader;
 
-export interface Source {
+export interface Source<T> {
   type?: 'bytes' | undefined;
-  start?(controller: ReadableStreamController<any>): Promise<any> | any | void;
-  pull?(controller: ReadableStreamController<any>): Promise<any> | any | void;
+  start?(controller: ReadableStreamController<T>): Promise<any> | any | void;
+  pull?(controller: ReadableStreamController<T>): Promise<any> | any | void;
   cancel?(reason: any): Promise<any> | any | void;
 }
 
@@ -69,7 +69,7 @@ export declare class CountQueuingStrategy
 
 export declare class ReadableStream {
   constructor(
-    underlyingSource?: Source,
+    underlyingSource?: Source<any>,
     options?: QueuingStrategy
   );
   readonly locked: boolean;
