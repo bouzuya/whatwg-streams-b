@@ -67,31 +67,31 @@ export declare class CountQueuingStrategy
   readonly highWaterMark: number;
 }
 
-export declare class ReadableStream {
+export declare class ReadableStream<T> {
   constructor(
-    underlyingSource?: Source<any>,
+    underlyingSource?: Source<T>,
     options?: QueuingStrategy
   );
   readonly locked: boolean;
   cancel(reason: any): Promise<any>;
-  getReader(options?: { mode?: string; }): ReadableStreamReader<any>;
-  pipeThrough(
-    transform: { writable: WritableStream; readable: ReadableStream; },
+  getReader(options?: { mode?: string; }): ReadableStreamReader<T>;
+  pipeThrough<U>(
+    transform: { writable: WritableStream<T>; readable: ReadableStream<U>; },
     options?: {
       preventClose?: boolean;
       preventAbort?: boolean;
       preventCancel?: boolean;
     }
-  ): ReadableStream;
+  ): ReadableStream<U>;
   pipeTo(
-    dest: WritableStream,
+    dest: WritableStream<T>,
     options?: {
       preventClose?: boolean;
       preventAbort?: boolean;
       preventCancel?: boolean;
     }
   ): Promise<any>;
-  tee(): [ReadableStream, ReadableStream];
+  tee(): [ReadableStream<T>, ReadableStream<T>];
 }
 
 export interface Writer<T> {
@@ -115,7 +115,7 @@ export interface TransformStreamDefaultController {
 export type TransformStreamController =
   TransformStreamDefaultController;
 
-export class TransformStream {
+export class TransformStream<T, U> {
   constructor(transformer: {
     start?(controller: TransformStreamController): any,
     transform?(
@@ -126,8 +126,8 @@ export class TransformStream {
       controller: TransformStreamController
     ): any
   });
-  readable: ReadableStream;
-  writable: WritableStream;
+  readable: ReadableStream<T>;
+  writable: WritableStream<U>;
 }
 
 export declare class WritableStreamDefaultController<T> {
@@ -145,10 +145,10 @@ export interface Sink<T> {
   abort?(reason: any): Promise<any> | any | void;
 }
 
-export declare class WritableStream {
-  constructor(underlyingSink?: Sink<any>);
+export declare class WritableStream<T> {
+  constructor(underlyingSink?: Sink<T>);
   // constructor(underlyingSink = {}, { size, highWaterMark = 1 } = {})
   readonly locked: boolean;
   abort(reason: any): Promise<any>;
-  getWriter(): Writer<any>;
+  getWriter(): Writer<T>;
 }
